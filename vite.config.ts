@@ -11,4 +11,9 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  server: {
+    headers: {
+      'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://id.worldcoin.org https://aistudiocdn.com; style-src 'self' 'unsafe-inline' https://id.worldcoin.org https://aistudiocdn.com; img-src 'self' data: https://id.worldcoin.org; font-src 'self' data: https://id.worldcoin.org https://aistudiocdn.com; connect-src 'self' https://id.worldcoin.org https://sentry.io https://status.worldcoin.org; frame-src https://id.worldcoin.org;",
+    },
+  },
 })
