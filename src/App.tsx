@@ -1,6 +1,3 @@
-// Fix: Removed the Vite client type reference which was causing errors.
-// Environment variable types are now handled by a global type definition
-// in src/types/index.ts, which also allows removing type casts below.
 import { IDKitWidget, VerificationLevel } from '@worldcoin/idkit';
 import { useGame, GameProvider } from '@/contexts/GameContext';
 import MainScreen from '@/components/MainScreen';
@@ -9,7 +6,7 @@ const AppContent = () => {
   const { isAuthenticated, setIsAuthenticated } = useGame();
 
   const handleSuccess = () => {
-    // This is where you would perform any actions after successful verification
+    // This action marks the user as human-verified, allowing them to proceed.
     setIsAuthenticated(true);
   };
 

@@ -7,13 +7,7 @@ import GameScreen from '@/components/GameScreen';
 const MainScreen: React.FC = () => {
   const { t } = useTranslation();
   const [isGameStarted, setIsGameStarted] = useState(false);
-  const { walletAddress, balance, connectWallet, fetchBalance, isLoading } = useGame();
-
-  useEffect(() => {
-    if (walletAddress) {
-      fetchBalance();
-    }
-  }, [walletAddress, fetchBalance]);
+  const { walletAddress, balance, connectWallet, isLoading } = useGame();
 
   if (isGameStarted) {
     return <GameScreen onBack={() => setIsGameStarted(false)} />;
@@ -38,7 +32,7 @@ const MainScreen: React.FC = () => {
       </div>
 
       <div className="space-y-4">
-        <Button onClick={() => setIsGameStarted(true)} size="lg">
+        <Button onClick={() => setIsGameStarted(true)} size="lg" disabled={!walletAddress}>
           {t('start-game')}
         </Button>
         <div className="flex space-x-2">

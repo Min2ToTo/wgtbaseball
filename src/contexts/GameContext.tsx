@@ -23,7 +23,7 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [balance, setBalance] = useState('0');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  
+
   const handleRequest = useCallback(async (request: () => Promise<void>) => {
     setIsLoading(true);
     setError(null);
@@ -36,7 +36,18 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       setIsLoading(false);
     }
   }, []);
-  
+
+  const fetchBalance = useCallback(async (address: string) => {
+    if (!address) return;
+    await handleRequest(async () => {
+      const readOnlyContract = getReadOnlyContract();
+      const tokenAddress = await readOnlyContract.wgtToken();
+      const tokenContract = await getTokenContract(tokenAddress);
+      const userBalance = await tokenContract.balanceOf(address);
+      setBalance(ethers.formatUnits(userBalance, 18)); // Assuming 18 decimals
+    });
+  }, [handleRequest]);
+
   const connectWallet = useCallback(async () => {
     await handleRequest(async () => {
       if (window.ethereum) {
@@ -44,34 +55,25 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         const accounts = await provider.send('eth_requestAccounts', []);
         if (accounts.length > 0) {
           setWalletAddress(accounts[0]);
-          await fetchBalance();
+          await fetchBalance(accounts[0]);
         }
       } else {
         throw new Error('Please install MetaMask!');
       }
     });
-  }, [handleRequest]);
+  }, [handleRequest, fetchBalance]);
 
-  const fetchBalance = useCallback(async () => {
-    if (!walletAddress) return;
-    await handleRequest(async () => {
-        const readOnlyContract = getReadOnlyContract();
-        const tokenAddress = await readOnlyContract.wgtToken();
-        const tokenContract = await getTokenContract(tokenAddress);
-        const userBalance = await tokenContract.balanceOf(walletAddress);
-        setBalance(ethers.formatUnits(userBalance, 18)); // Assuming 18 decimals
-    });
-  }, [walletAddress, handleRequest]);
-  
   const claimReward = useCallback(async () => {
     await handleRequest(async () => {
-        const contract = await getContract();
-        const amount = ethers.parseUnits(REWARD_AMOUNT.toString(), 18); // Assuming 18 decimals
-        const tx = await contract.claimReward(amount);
-        await tx.wait();
-        await fetchBalance();
+      const contract = await getContract();
+      const amount = ethers.parseUnits(REWARD_AMOUNT.toString(), 18); // Assuming 18 decimals
+      const tx = await contract.claimReward(amount);
+      await tx.wait();
+      if (walletAddress) {
+        await fetchBalance(walletAddress);
+      }
     });
-  }, [fetchBalance, handleRequest]);
+  }, [walletAddress, fetchBalance, handleRequest]);
 
   const value = useMemo(() => ({
     isAuthenticated,
@@ -82,7 +84,12 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     error,
     connectWallet,
     claimReward,
-    fetchBalance,
+    // FIX: The function must return a Promise<void> to match the GameContextType. Making it async ensures it returns a promise.
+    fetchBalance: async () => {
+        if (walletAddress) {
+          await fetchBalance(walletAddress);
+        }
+    }
   }), [
     isAuthenticated,
     walletAddress,

@@ -41,31 +41,6 @@ export const resources = {
       'rules-out': 'Out (O): A digit is not in the secret number at all.',
       'rules-homerun': 'Homerun: You win by guessing the number correctly (e.g., 3S).',
       'rules-strike-out': 'Strike Out: You lose if you fail to guess the number within {{maxGuesses}} attempts.',
-
-      // Settings Modal
-      'settings-title': 'Settings',
-      'language': 'Language',
-      'theme': 'Theme',
-      'light-theme': 'Light',
-      'dark-theme': 'Dark',
-
-      // Language Selection Modal
-      'language-select-title': 'Select Language',
-
-       // Achievements Screen
-      'achievements-title': 'Achievements',
-      'achievements-desc': 'Unlock achievements by playing the game.',
-      'homerun-king': 'Homerun King',
-      'homerun-king-desc': 'Achieve 10 homeruns.',
-      'master-detective': 'Master Detective',
-      'master-detective-desc': 'Win a game with only 1 guess.',
-
-      // Ranking Screen
-      'ranking-title': 'Weekly Ranking',
-      'ranking-desc': 'Top players of the week based on homeruns.',
-      'rank': 'Rank',
-      'player': 'Player',
-      'homeruns': 'Homeruns',
     },
   },
   ko: {
@@ -110,31 +85,6 @@ export const resources = {
       'rules-out': '아웃 (O): 숫자가 비밀 숫자에 포함되어 있지 않습니다.',
       'rules-homerun': '홈런: 숫자를 정확히 맞히면(예: 3S) 승리합니다.',
       'rules-strike-out': '스트라이크 아웃: {{maxGuesses}}번의 기회 안에 숫자를 맞히지 못하면 패배합니다.',
-
-      // Settings Modal
-      'settings-title': '설정',
-      'language': '언어',
-      'theme': '테마',
-      'light-theme': '라이트',
-      'dark-theme': '다크',
-      
-      // Language Selection Modal
-      'language-select-title': '언어 선택',
-
-      // Achievements Screen
-      'achievements-title': '업적',
-      'achievements-desc': '게임을 플레이하고 업적을 잠금 해제하세요.',
-      'homerun-king': '홈런왕',
-      'homerun-king-desc': '홈런 10번 달성',
-      'master-detective': '마스터 탐정',
-      'master-detective-desc': '단 1번의 추측으로 게임 승리',
-
-      // Ranking Screen
-      'ranking-title': '주간 랭킹',
-      'ranking-desc': '이번 주 홈런 기준 상위 플레이어들입니다.',
-      'rank': '순위',
-      'player': '플레이어',
-      'homeruns': '홈런',
     },
   },
 };

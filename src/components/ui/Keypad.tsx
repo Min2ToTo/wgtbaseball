@@ -13,19 +13,18 @@ const Keypad: React.FC<KeypadProps> = ({ onNumberClick, onDelete, onSubmit, disa
   const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 
   return (
-    <div className="grid grid-cols-3 gap-2">
+    <div className="grid grid-cols-3 gap-2 w-full">
       {numbers.map((num) => (
         <Button
           key={num}
           onClick={() => onNumberClick(num)}
           variant="secondary"
           className="aspect-square text-2xl"
-          disabled={disabled}
         >
           {num}
         </Button>
       ))}
-      <Button onClick={onDelete} variant="secondary" className="aspect-square" disabled={disabled}>
+      <Button onClick={onDelete} variant="secondary" className="aspect-square">
         <X />
       </Button>
       <Button onClick={onSubmit} variant="primary" className="aspect-square" disabled={disabled}>

@@ -1,4 +1,3 @@
-// Fix: Import React to make its types available in this file.
 import React from 'react';
 import { TFunction } from 'i18next';
 
@@ -15,7 +14,6 @@ export interface GuessResult {
 
 export interface GameHistoryProps {
   guesses: GuessResult[];
-  secretCode: number[];
   t: TFunction;
 }
 
@@ -44,7 +42,7 @@ declare global {
     ethereum?: any;
   }
 
-  // Fix: Manually define types for `import.meta.env` as a workaround for
+  // Manually define types for `import.meta.env` as a workaround for
   // `vite/client` type resolution issues. This provides type safety for
   // environment variables throughout the application.
   interface ImportMetaEnv {

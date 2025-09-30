@@ -49,7 +49,7 @@ const GameScreen: React.FC<GameScreenProps> = ({ onBack }) => {
 
       <div className="flex items-center justify-center w-full h-16 bg-gray-200 dark:bg-gray-700 rounded-lg mb-4">
         <p className="text-3xl font-mono tracking-widest text-gray-900 dark:text-white">
-          {currentGuess.join(' ') || <span className="text-gray-400 dark:text-gray-500">_ _ _</span>}
+          {currentGuess.join(' ') || <span className="text-gray-400 dark:text-gray-500">{'_ '.repeat(SECRET_CODE_LENGTH).trim()}</span>}
         </p>
       </div>
 
@@ -60,7 +60,7 @@ const GameScreen: React.FC<GameScreenProps> = ({ onBack }) => {
         disabled={isGameOver || currentGuess.length !== SECRET_CODE_LENGTH}
       />
       
-      <GameHistory guesses={guesses} secretCode={secretCode} t={t} />
+      <GameHistory guesses={guesses} t={t} />
 
       <div className="mt-4 flex space-x-2">
         <Button onClick={handleNewGame} variant="secondary">
