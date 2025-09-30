@@ -19,16 +19,13 @@ const AppContent = () => {
         <MainScreen />
       ) : (
         <div className="flex flex-col items-center justify-center min-h-screen">
-            <h1 className="text-3xl font-bold mb-4">WGT Baseball</h1>
-            <p className="mb-8">Verify with World ID to play.</p>
+            <h1 className="text-3xl font-bold mb-8">WGT Baseball</h1>
             <IDKitWidget
               app_id={import.meta.env.VITE_WLD_APP_ID}
               action={import.meta.env.VITE_WLD_ACTION_ID}
               onSuccess={handleSuccess}
               verification_level={VerificationLevel.Device}
-            >
-              {({ open }: { open: () => void }) => <button onClick={open}>Verify with World ID</button>}
-            </IDKitWidget>
+            />
         </div>
       )}
     </div>
