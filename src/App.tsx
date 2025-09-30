@@ -1,3 +1,6 @@
+// Fix: Add a reference to Vite's client types to define `import.meta.env`.
+/// <reference types="vite/client" />
+
 import { IDKitWidget, VerificationLevel } from '@worldcoin/idkit';
 import { useGame, GameProvider } from '@/contexts/GameContext';
 import MainScreen from '@/components/MainScreen';

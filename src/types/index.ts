@@ -1,3 +1,5 @@
+// Fix: Import React to make its types available in this file.
+import React from 'react';
 import { TFunction } from 'i18next';
 
 export enum GameMode {
