@@ -24,7 +24,7 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   
-  const handleRequest = useCallback(async (request: () => Promise<void>, loadingMessage?: string) => {
+  const handleRequest = useCallback(async (request: () => Promise<void>) => {
     setIsLoading(true);
     setError(null);
     try {
@@ -70,7 +70,7 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         const tx = await contract.claimReward(amount);
         await tx.wait();
         await fetchBalance();
-    }, 'Claiming reward...');
+    });
   }, [fetchBalance, handleRequest]);
 
   const value = useMemo(() => ({

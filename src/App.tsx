@@ -27,7 +27,7 @@ const AppContent = () => {
               onSuccess={handleSuccess}
               verification_level={VerificationLevel.Device}
             >
-              {({ open }) => <button onClick={open}>Verify with World ID</button>}
+              {({ open }: { open: () => void }) => <button onClick={open}>Verify with World ID</button>}
             </IDKitWidget>
         </div>
       )}
