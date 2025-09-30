@@ -43,4 +43,16 @@ declare global {
   interface Window {
     ethereum?: any;
   }
+
+  // Fix: Manually define types for `import.meta.env` as a workaround for
+  // `vite/client` type resolution issues. This provides type safety for
+  // environment variables throughout the application.
+  interface ImportMetaEnv {
+    readonly VITE_WLD_APP_ID: `app_${string}`;
+    readonly VITE_WLD_ACTION_ID: string;
+  }
+
+  interface ImportMeta {
+    readonly env: ImportMetaEnv;
+  }
 }

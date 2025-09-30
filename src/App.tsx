@@ -1,6 +1,6 @@
-// Fix: Add a reference to Vite's client types to define `import.meta.env`.
-/// <reference types="vite/client" />
-
+// Fix: Removed the Vite client type reference which was causing errors.
+// Environment variable types are now handled by a global type definition
+// in src/types/index.ts, which also allows removing type casts below.
 import { IDKitWidget, VerificationLevel } from '@worldcoin/idkit';
 import { useGame, GameProvider } from '@/contexts/GameContext';
 import MainScreen from '@/components/MainScreen';
@@ -22,8 +22,8 @@ const AppContent = () => {
             <h1 className="text-3xl font-bold mb-4">WGT Baseball</h1>
             <p className="mb-8">Verify with World ID to play.</p>
             <IDKitWidget
-              app_id={import.meta.env.VITE_WLD_APP_ID as `app_${string}`}
-              action={import.meta.env.VITE_WLD_ACTION_ID as string}
+              app_id={import.meta.env.VITE_WLD_APP_ID}
+              action={import.meta.env.VITE_WLD_ACTION_ID}
               onSuccess={handleSuccess}
               verification_level={VerificationLevel.Device}
             >
